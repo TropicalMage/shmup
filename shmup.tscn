@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Node2D.gd" type="Script" id=1]
 [ext_resource path="res://Ship.gd" type="Script" id=2]
 [ext_resource path="res://assets/playerShip3_green.png" type="Texture" id=3]
 [ext_resource path="res://Evil.gd" type="Script" id=4]
 [ext_resource path="res://assets/ufoYellow.png" type="Texture" id=5]
+[ext_resource path="res://Bounds.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -15,6 +16,11 @@ radius = 3.18713
 
 custom_solver_bias = 0.0
 radius = 34.7481
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 356.869, 440.232 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -29,7 +35,7 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
-default_position = Vector2( 100, 100 )
+default_position = Vector2( 300, 700 )
 
 [node name="Sprite" type="Sprite" parent="Good"]
 
@@ -59,6 +65,24 @@ _sections_unfolded = [ "Transform" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Evil"]
 
 shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bounds" type="Area2D" parent="."]
+
+position = Vector2( 300, 400 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds"]
+
+shape = SubResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
 
