@@ -1,24 +1,18 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Node2D.gd" type="Script" id=1]
 [ext_resource path="res://Ship.gd" type="Script" id=2]
 [ext_resource path="res://assets/playerShip3_green.png" type="Texture" id=3]
 [ext_resource path="res://ShowDot.gd" type="Script" id=4]
-[ext_resource path="res://Evil.gd" type="Script" id=5]
-[ext_resource path="res://assets/ufoYellow.png" type="Texture" id=6]
-[ext_resource path="res://Bounds.gd" type="Script" id=7]
+[ext_resource path="res://Bounds.gd" type="Script" id=5]
+[ext_resource path="res://Life Counter.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 3.0
+radius = 2.58584
 
-[sub_resource type="CircleShape2D" id=2]
-
-custom_solver_bias = 0.0
-radius = 34.7481
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 1127.86, 1149.4 )
@@ -45,32 +39,9 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Good"]
 
-position = Vector2( -0.193756, 0.968628 )
 scale = Vector2( 3.28812, 2.92267 )
 shape = SubResource( 1 )
 script = ExtResource( 4 )
-
-[node name="Evil" type="Area2D" parent="."]
-
-position = Vector2( 300, 50 )
-input_pickable = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 5 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite" type="Sprite" parent="Evil"]
-
-texture = ExtResource( 6 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Evil"]
-
-shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Bounds" type="Area2D" parent="."]
@@ -84,13 +55,31 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 7 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds"]
 
 position = Vector2( -5.23022, 2.71198 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Life Counter" type="Label" parent="."]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script = ExtResource( 6 )
 
 
