@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://maneuver/Linear Maneuver.tscn" type="PackedScene" id=1]
+[ext_resource path="res://body/projectile/Point Projectile.tscn" type="PackedScene" id=2]
+
+[node name="LP Projectile" type="Node2D"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="Linear Maneuver" parent="." instance=ExtResource( 1 )]
+
+speed = Vector2( 0, 200 )
+
+[node name="Point Projectile" parent="." instance=ExtResource( 2 )]
+
+scale = Vector2( 0.5, 0.5 )
+
+

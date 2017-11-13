@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Node2D.gd" type="Script" id=1]
 [ext_resource path="res://Ship.gd" type="Script" id=2]
@@ -6,6 +6,14 @@
 [ext_resource path="res://ShowDot.gd" type="Script" id=4]
 [ext_resource path="res://Bounds.gd" type="Script" id=5]
 [ext_resource path="res://Life Counter.gd" type="Script" id=6]
+[ext_resource path="res://maneuver/Linear Maneuver.tscn" type="PackedScene" id=7]
+[ext_resource path="res://body/Circle Body (Weak).tscn" type="PackedScene" id=8]
+[ext_resource path="res://ai/SpinnerAI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://pattern/Pinwheel Pattern.tscn" type="PackedScene" id=10]
+[ext_resource path="res://projectile/LP Projectile.tscn" type="PackedScene" id=11]
+[ext_resource path="res://body/Square Body (Weak).tscn" type="PackedScene" id=12]
+[ext_resource path="res://ai/TargetingAI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://pattern/Tri Pattern.tscn" type="PackedScene" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -15,29 +23,31 @@ radius = 2.58584
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 1127.86, 1149.4 )
+extents = Vector2( 307.137, 418.132 )
 
 [node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
-[node name="Good" type="KinematicBody2D" parent="."]
+[node name="Player" type="KinematicBody2D" parent="."]
 
 position = Vector2( 300, 700 )
+z = -100
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z" ]
 default_position = Vector2( 300, 700 )
 
-[node name="Sprite" type="Sprite" parent="Good"]
+[node name="Sprite" type="Sprite" parent="Player"]
 
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Good"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 
 scale = Vector2( 3.28812, 2.92267 )
 shape = SubResource( 1 )
@@ -46,7 +56,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Bounds" type="Area2D" parent="."]
 
-visible = false
+editor/display_folded = true
 position = Vector2( 300, 400 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -81,5 +91,58 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script = ExtResource( 6 )
+
+[node name="LCSP Enemy" type="Node2D" parent="."]
+
+editor/display_folded = true
+position = Vector2( 300, 150 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Linear Maneuver" parent="LCSP Enemy" instance=ExtResource( 7 )]
+
+speed = Vector2( 0, -10 )
+
+[node name="Circle Body (Weak)" parent="LCSP Enemy" instance=ExtResource( 8 )]
+
+[node name="SpinnerAI" parent="LCSP Enemy/Circle Body (Weak)" instance=ExtResource( 9 )]
+
+[node name="Pattern" parent="LCSP Enemy/Circle Body (Weak)/SpinnerAI" instance=ExtResource( 10 )]
+
+projectile_resource = ExtResource( 11 )
+
+[node name="LSTT" type="Node2D" parent="."]
+
+editor/display_folded = true
+position = Vector2( 50, 50 )
+
+[node name="Linear Maneuver" parent="LSTT" instance=ExtResource( 7 )]
+
+speed = Vector2( 30, 10 )
+
+[node name="Square Body (Weak)" parent="LSTT" instance=ExtResource( 12 )]
+
+[node name="TargetingAI" parent="LSTT/Square Body (Weak)" instance=ExtResource( 13 )]
+
+[node name="Pattern" parent="LSTT/Square Body (Weak)/TargetingAI" instance=ExtResource( 14 )]
+
+projectile_resource = ExtResource( 11 )
+
+[node name="LSTT2" type="Node2D" parent="."]
+
+editor/display_folded = true
+position = Vector2( 550, 50 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Linear Maneuver" parent="LSTT2" instance=ExtResource( 7 )]
+
+speed = Vector2( -30, 10 )
+
+[node name="Square Body (Weak)" parent="LSTT2" instance=ExtResource( 12 )]
+
+[node name="TargetingAI" parent="LSTT2/Square Body (Weak)" instance=ExtResource( 13 )]
+
+[node name="Pattern" parent="LSTT2/Square Body (Weak)/TargetingAI" instance=ExtResource( 14 )]
+
+projectile_resource = ExtResource( 11 )
 
 

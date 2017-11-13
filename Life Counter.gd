@@ -1,7 +1,7 @@
 extends Label
 
 func _ready():
-	var player = get_node("/root/Node2D/Good")
+	var player = get_node("/root/Node2D/Player")
 	player.connect("change_health", self, "rekt")
 	rekt(player.lives)
 	
