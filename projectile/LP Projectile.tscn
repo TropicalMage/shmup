@@ -14,5 +14,7 @@ speed = Vector2( 0, 200 )
 [node name="Point Projectile" parent="." instance=ExtResource( 2 )]
 
 scale = Vector2( 0.5, 0.5 )
+collision_layer = 8
+_sections_unfolded = [ "Collision", "Transform" ]
 
 

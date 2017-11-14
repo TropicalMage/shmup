@@ -8,12 +8,17 @@ var lives = 3
 signal change_health(health)
 
 var invincibility_timer
+var current_pattern
 
 func _ready():
 	invincibility_timer = Timer.new()
-	add_child(invincibility_timer)
 	invincibility_timer.set_wait_time(2)
 	invincibility_timer.connect("timeout", self, "toggle_invicibility")
+	add_child(invincibility_timer)
+	
+	current_pattern = load("res://pattern/Single Pattern.tscn").instance()
+	current_pattern.set_projectile_resource(load("res://projectile/Player Point Projectile.tscn"))
+	add_child(current_pattern)
 
 func _input(event):
 	if (event.is_action_pressed("ui_up") || event.is_action_released("ui_down")):
@@ -32,6 +37,8 @@ func _input(event):
 		speed *= .5
 	if (event.is_action_released("slowdown")):
 		speed *= 2
+	if(event.is_action_pressed("ui_select")):
+		current_pattern.shoot()
 
 func _physics_process(delta):
 	move_and_collide(direction * speed * delta)
