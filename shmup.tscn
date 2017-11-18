@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Node2D.gd" type="Script" id=1]
 [ext_resource path="res://Ship.gd" type="Script" id=2]
@@ -8,7 +8,9 @@
 [ext_resource path="res://Life Counter.gd" type="Script" id=6]
 [ext_resource path="res://body/Circle Body (Weak).tscn" type="PackedScene" id=7]
 [ext_resource path="res://ai/TargetingAI.tscn" type="PackedScene" id=8]
-[ext_resource path="res://pattern/Single Pattern.tscn" type="PackedScene" id=9]
+[ext_resource path="res://pattern/Tri Pattern.tscn" type="PackedScene" id=9]
+[ext_resource path="res://projectile/LP Projectile.tscn" type="PackedScene" id=10]
+[ext_resource path="res://maneuver/Wave Maneuver.gd" type="Script" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -102,5 +104,14 @@ _sections_unfolded = [ "Collision", "Transform" ]
 [node name="TargetingAI" parent="Tester/Circle Body (Weak)" instance=ExtResource( 8 )]
 
 [node name="Pattern" parent="Tester/Circle Body (Weak)/TargetingAI" instance=ExtResource( 9 )]
+
+projectile_resource = ExtResource( 10 )
+
+[node name="Wave Maneuver" type="Node2D" parent="Tester"]
+
+script = ExtResource( 11 )
+linear_speed = 30
+amplitude = 150
+frequency = 3
 
 
